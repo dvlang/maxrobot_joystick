@@ -87,36 +87,36 @@ void loop() {
   {    
     if(LeftButton) //button is pressed for arm up/down control
     {
-      sprintf(buf4,"H,"); //chassis stop
-      sprintf(buf5,"U,"); //arm up
+      sprintf(buf4,"u"); //chassis stop
+      //sprintf(buf5,"U,"); //arm up
     }
     else
     {
       if(!RightButton){
-        sprintf(buf4,"B,"); //chassis reverse
+        sprintf(buf4,"b"); //chassis reverse
       }
-      sprintf(buf5,"H,"); //arm hold
+     // sprintf(buf4,"H,"); //arm hold
     }  
   }
   else if(leftStick > 700)  //user is pushing forward on stick
   {
     if(LeftButton) //left button pressed for arm up/down dontrol
     {
-      sprintf(buf4,"H,"); //chassis stop
-      sprintf(buf5,"D,"); //arm down
+      sprintf(buf4,"d"); //chassis stop
+     // sprintf(buf5,"D,"); //arm down
     }
     else
     {
       if(!RightButton){
-        sprintf(buf4,"F,");  //chassis forward
+        sprintf(buf4,"f");  //chassis forward
       }
-      sprintf(buf5,"H,"); //arm hold
+     // sprintf(buf5,"H,"); //arm hold
     }
   }
   else
   {
-    sprintf(buf4,"H,"); //chassis stopped
-    sprintf(buf5,"H,"); //arm hold
+    //sprintf(buf4,"H,"); //chassis stopped
+   // sprintf(buf5,"H,"); //arm hold
   }
 
   //**********************************************
@@ -127,15 +127,15 @@ void loop() {
   {
     if(RightButton) //left button pressed for gripper dontrol
     {
-      sprintf(buf4,"H,"); //chassis stop
-      sprintf(buf6,"O,");  //gripper open
+      sprintf(buf4,"o"); //chassis stop
+     // sprintf(buf6,"O,");  //gripper open
     }
     else
     {
       if(!LeftButton){
-        sprintf(buf4,"R,");  //chassis right
+        sprintf(buf4,"r");  //chassis right
       }
-      sprintf(buf6,"H,"); //gripper hold
+      //sprintf(buf6,"H,"); //gripper hold
     }
     
   }
@@ -144,29 +144,29 @@ void loop() {
   {
     if(RightButton) //left button pressed for gripper dontrol
     {
-      //sprintf(buf4,"H,"); //chassis stop
-      sprintf(buf6,"C,");  //gripper CLOSE
+      sprintf(buf4,"c"); //chassis stop
+    //sprintf(buf6,"C,");  //gripper CLOSE
     }
     else
     {
       if(!LeftButton){
-        sprintf(buf4,"L,");  //chassis left
+        sprintf(buf4,"l");  //chassis left
       }
-      sprintf(buf6,"H,"); //gripper HOLD
+      //sprintf(buf6,"H,"); //gripper HOLD
     }
   }
   else
   {
 
    //   sprintf(buf4,"H,");  //chassis HOLD
-      sprintf(buf6,"H,"); //gripper HOLD
+      //sprintf(buf6,"H,"); //gripper HOLD
 
   }
   
 
   // Send control commands
   delay(100);
-  sprintf(buf3,"%d\r\n",loopcnt);
+  //sprintf(buf3,"%d\r\n",loopcnt);
 
   
   //Serial1.print("\r\n");    //comment out for actual robot control
@@ -177,12 +177,13 @@ void loop() {
 
   //build up the control word and send
   controlword.concat(buf4); //chassis forward/back motion (F,B,L,R,H) (Fowrward,Back,Left,Right,Hold)
-  controlword.concat(buf5); //arm up down (U,D,H)
-  controlword.concat(buf6); //gripper open/close (O,C,H)
-  controlword.concat(buf3);
+ // controlword.concat(buf5); //arm up down (U,D,H)
+ // controlword.concat(buf6); //gripper open/close (O,C,H)
+ // controlword.concat(buf3);
   Serial1.print(controlword);
 
   //clear controlword and increment loop counter
   controlword = ("");
+  sprintf(buf4,"s"); 
   loopcnt++;
 }
